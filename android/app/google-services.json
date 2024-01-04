@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "691859909099",
+    "project_id": "react-native-push-milton",
+    "storage_bucket": "react-native-push-milton.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691859909099:android:ad30d93f9b927bc1ead1ae",
+        "android_client_info": {
+          "package_name": "com.commune"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV8xugX8tUB6r4xcedp_h6AmTOdIZXQJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
