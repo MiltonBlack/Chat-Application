@@ -9,18 +9,18 @@ import SplashScreen from '../screen/SplashScreen';
 import InviteScreen from '../screen/InviteScreen';
 import NewChatScreen from '../screen/NewChatScreen';
 import AllChateScreen from '../screen/AllChatScreen';
+import MainStack from './MainStack';
 import ChatScreen from '../screen/ChatScreen';
 import StatusScreen from '../screen/StatusScreen';
 import ViewStatusScreen from '../screen/viewStatusScreen';
-import UploadStatusScreen from '../screen/uploadStatusScreen'; 
+import UploadStatusScreen from '../screen/uploadStatusScreen';
 import LiveScreen from '../screen/LiveScreen';
 import VoiceCall from '../screen/VoiceCall/index';
-// import VideoCall from '../screen/VideoCall';
-import VideoCall from '../screen/VideoCall/VideoCall'
+import VideoCall from '../screen/VideoCall';
 import CallingScreen from '../screen/callingNotificationScreen';
 import useAppData from '../service/AppData';
 import NavStack from './NavStack';
-import AMA_Live from '../screen/AMA_Live';
+import Status from '../screen/Status/Status'
 
 const Stack = createNativeStackNavigator();
 
@@ -40,8 +40,10 @@ const AuthStack = () => {
       <Stack.Screen name="OtpScreen" component={OtpScreen} />
       <Stack.Screen name="InviteScreen" component={InviteScreen} />
       <Stack.Screen name="NewChatScreen" component={NewChatScreen} />
+      {/* <Stack.Screen name="MainStack" component={MainStack} /> */}
       <Stack.Screen name="NavStack" component={NavStack} />
       <Stack.Screen name="AllChateScreen" component={AllChateScreen} />
+      <Stack.Screen name="Status" component={Status} />
       <Stack.Screen name="ChatScreen" component={ChatScreen} />
       <Stack.Screen name="LiveScreen" component={LiveScreen} />
       <Stack.Screen name="StatusScreen" component={StatusScreen} />
@@ -50,9 +52,7 @@ const AuthStack = () => {
       <Stack.Screen name="CallingScreen" component={CallingScreen} />
       <Stack.Screen name="VideoCall" component={VideoCall} />
       <Stack.Screen name="VoiceCall" component={VoiceCall} />
-      <Stack.Screen name="AMA_Live" component={AMA_Live} />
     </Stack.Navigator>
   );
 };
-
 export default AuthStack;

@@ -37,6 +37,7 @@ const CreateAccount = ({navigation}) => {
   // 300245
 
   const handleSubmit = async ({ phoneNumber, countryCode}) => {
+    // navigation.navigate('VideoCall');
 
     try {
       phoneNumber = countryCode+phoneNumber;

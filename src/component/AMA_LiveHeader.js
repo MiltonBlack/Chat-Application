@@ -1,12 +1,12 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { COLORS, FONTS, HP_WP, SIZE } from '../component/theme';
+import {COLORS, FONTS, HP_WP, SIZE} from '../component/theme';
 
-const AMA_LiveHeader = ({ onPressAmaLive, onPressGoLive, onPressCategory }) => {
+const AMA_LiveHeader = ({onPressAmaLive, onPressGoLive, onPressCategory}) => { 
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity

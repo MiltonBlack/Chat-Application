@@ -10,7 +10,7 @@ import {
   PermissionsAndroid,
   Platform
 } from 'react-native';
-import {ClientRoleType, createAgoraRtcEngine, IRtcEngine, ChannelProfileType} from 'react-native-agora'
+// import {ClientRoleType, createAgoraRtcEngine, IRtcEngine, ChannelProfileType} from 'react-native-agora'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -19,7 +19,7 @@ import {COLORS, FONTS, HP_WP, IMAGES, SIZE} from '../component/theme';
 
 const CallNotificationScreen = ({ route, navigation }) => {
   
-  const agoraEngineRef = useRef(IRtcEngine);
+  // const agoraEngineRef = useRef(IRtcEngine);
   const [isJoined, setIsJoined] = useState(false);
   const [remoteUid, setRemoteUid] = useState(0);
   const [message, setMessage] = useState('');

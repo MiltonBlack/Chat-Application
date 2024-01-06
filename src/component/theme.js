@@ -6,7 +6,7 @@ import {RFPercentage} from 'react-native-responsive-fontsize';
 
 export const HP_WP = {wp, hp};
 
-export const IMAGES = { 
+export const IMAGES = {
   logo: require('../assest/images/logo.png'),
   dotIcon: require('../assest/icon/dot.png'),
   profile: require('../assest/icon/profile.png'),
@@ -16,8 +16,8 @@ export const IMAGES = {
   headerImage: require('../assest/images/headerImg.png'),
   plusbtn: require('../assest/images/plusbtn.png'),
   hand: require('../assest/images/hand.png'),
-  // butterfly: require('../assest/images/butterfly.png'),
-  // liveImg: require('../assest/icon/liveImg.png'),
+  butterfly: require('../assest/images/butterfly.png'),
+  liveImg: require('../assest/icon/liveImg.png'),
   backGroundImage: require('../assest/images/voiceCall.png'),
   videoCall: require('../assest/images/videoCall.png'),
   imageIcon: require('../assest/images/imageIcon.png'),

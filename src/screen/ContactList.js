@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, View, Text, StyleSheet } from 'react-native';
 import Contacts from 'react-native-contacts';
 import { Contact } from './Contacted';
-
 const ContactsList = () => {
     const [contacts, setContacts] = useState([]);
     useEffect(() => {

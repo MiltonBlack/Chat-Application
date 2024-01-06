@@ -23,7 +23,6 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useSubscription, useMutation, useQuery, gql } from '@apollo/client';
-import axios from 'axios'
 
 import Container from '../component/Container';
 import ChatModal from '../component/ChatModal';
@@ -59,7 +58,6 @@ const ChatScreen = ({ route, navigation }) => {
   const [userIsOnline, setuserIsOnline] = useState(false)
   const [userId, setuserId] = useState(async () => await AsyncStorage.getItem('userID'))
   const [visible, setVisible] = useState(false);
-  const [token, setToken] = useState('');
   const Modalclose = () => setVisible(false);
   const Modalopen = () => setVisible(true);
   const [image, setImage] = useState('');
@@ -356,7 +354,7 @@ const ChatScreen = ({ route, navigation }) => {
 
   const voiceCallUser = async () => {
     try {
-      setisLoading(true);
+      setisLoading(true)
 
       const { data } = await createCallLog({
         variables: { caller: authUserPhoneNumber, receiver: phoneNumber, type: 'voice' },
@@ -375,21 +373,10 @@ const ChatScreen = ({ route, navigation }) => {
     }
   }
 
-  const fetchToken = async () => {
-    await axios.get(`http://13.56.194.200:4000/access_token`, {
-        params: {
-            channelName,
-        },
-    }).then(res => {
-        setToken(res.data.token);
-        console.log('consoleE3', token)
-    })
-}
   const videoCallUser = async () => {
 
     try {
-      setisLoading(true);
-      await fetchToken();
+      setisLoading(true)
 
       const { data } = await createCallLog({
         variables: { caller: authUserPhoneNumber, receiver: phoneNumber, type: 'video' },
@@ -397,9 +384,9 @@ const ChatScreen = ({ route, navigation }) => {
 
       if (data) {
         setisLoading(false)
-        console.log('DATA1', data) 
+        console.log('DATA1', data)
 
-        navigation.navigate('VideoCall', { phoneNumber, chatRoomUsers, chatRoom, authUserPhoneNumber, token, from: 'chatScreen' })
+        navigation.navigate('VideoCall', { phoneNumber, chatRoomUsers, chatRoom, authUserPhoneNumber, from: 'chatScreen' })
 
       }
     } catch (error) {

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { AudioRecorder, AudioUtils } from 'react-native-audio';
-import { COLORS, HP_WP } from '../../component/theme';
+import React, {useState} from 'react';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import {AudioRecorder, AudioUtils} from 'react-native-audio';
+import {COLORS, HP_WP} from '../../component/theme';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const AudioRecording = () => {
@@ -33,9 +33,9 @@ const AudioRecording = () => {
   };
 
   const stopRecording = async () => {
-    await AudioRecorder.stopRecording();
-    setIsRecording(false);
-    setStart(false);
+      await AudioRecorder.stopRecording();
+      setIsRecording(false);
+      setStart(false);
   };
 
   return (
@@ -44,7 +44,8 @@ const AudioRecording = () => {
         style={styles.micContainer}
         onLongPress={startRecording}
         onPressOut={stopRecording}
-      >
+        
+        >
         <FontAwesome5 name="microphone-alt" size={20} color={COLORS.white} />
       </TouchableOpacity>
     </View>

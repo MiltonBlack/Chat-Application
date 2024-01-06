@@ -45,7 +45,7 @@ const Contacted = ({ item, addNewChatRoom }) => {
                         style={styles.profileImage}
                     />
                     <View style={styles.profileMainContainer}>
-                        <Text style={styles.name}>{`${item.givenName} ${item?.middleName && item.middleName + " "}`}</Text>
+                        <Text style={styles.name}>{`${item.givenName} ${item?.middleName && item.middleName + " "} ${item?.familyName}`}</Text>
                         <Text
                             style={
                                 styles.number

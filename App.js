@@ -183,7 +183,7 @@ const App = () => {
 
   const accessContacts = async () => {
     Contacts.getAll()?.then(contactsData => { 
-      const arrangedContacts = contactsData?.sort((first, second) => first.givenName < second.givenName ? -1 : 1);
+      const arrangedContacts = contactsData?.sort((first, second) => first.givenName?.toLowerCase() < second.givenName?.toLowerCase() ? -1 : 1);
       setContact(arrangedContacts);
       // console.log(arrangedContacts.length);
     })

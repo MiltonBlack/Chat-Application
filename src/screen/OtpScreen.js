@@ -214,7 +214,7 @@ const resendOTP = async () => {
         )}
       </ScrollView>
       <GlobalButton
-        onPress={OtpVerify} 
+        onPress={OtpVerify}
         buttonStyle={styles.buttonStyle}
         buttonTitle={'Verify'}
       />

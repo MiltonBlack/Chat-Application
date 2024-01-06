@@ -39,20 +39,19 @@ import styles from '../styles/contactStyles';
 const InviteScreen = ({ route, navigation }) => {
   const [{ getContect }] = useAppData();
   const { setContact } = useStore();
-  const [contacts, setContacts] = useState(null);
+  const [contacts, setContacts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedContacts, setSelectedContacts] = useState([]);
   const [userPhoneNumber, setUserphoneNumber] = useState(async () => await AsyncStorage.getItem('authUserPhoneNumber'));
+  const [selectedContactsMain, setSelectedContactsMain] = useState([]);
+  const [search, setSearch] = useState('');
   const [UserInviteCode, setUserInviteCode] = useState('');
   const [userId, setuserId] = useState('');
   const [sendInvitationRequest, { loading, error, data }] = useMutation(SEND_INVITATION_REQUEST);
   const [createNewChatRoom, { loading: loading2, }] = useMutation(CREATE_NEW_CHATROOM);
   const { loading: loading1, error: error1, data: data1, refetch: refetch1 } = useQuery(GET_USER_CHATS);
   const [isVisible, setisVisible] = useState(false);
-  const [filteredContacts, setFilteredContacts] = useState([]);
-
-  useEffect(() => {
-    accessContacts()
-  }, [contacts])
+  const [filteredContacts, setFilteredContacts] = useState(contacts);
 
   const shareContent = async content => {
     try {
@@ -68,26 +67,103 @@ const InviteScreen = ({ route, navigation }) => {
     async function fetch() {
       await getToken();
       if (userPhoneNumber) {
+        await ConnectPermission();
         await setInviteCodeeee()
       }
+      setContacts(getContect);
     }
     fetch();
-    console.log("useEffect 1 " + contacts?.length);
+    console.log("useEffect 1 " + contacts.length);
   }, []);
 
+  useEffect(()=> {
+    accessContacts()
+  },[])
 
-  const accessContacts = async () => {
-    await Contacts.getAll()?.then(contactsData => {
-      setContacts(contactsData);
-    })
-    await getContect;
-  };
   const setInviteCodeeee = async () => {
     const inviteCode = await AsyncStorage.getItem('inviteRequestCode');
     console.log('inviteCode', inviteCode);
     setUserInviteCode(inviteCode)
   }
 
+  const ConnectPermission = async () => {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_CONTACTS);
+      if (!granted) {
+        const requestResult = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+          {
+            title: 'Access Contacts',
+            message: 'Commune needs to view your Phone Contacts inorder to function well. Please grant it access.',
+          }
+        );
+        if (requestResult === 'never_ask_again') {
+          // Handle the case where the user denied the permission and selected "Never ask again"
+          // You can navigate the user to app settings in this case.
+          setisVisible(true);
+          setTimeout(() => {
+            setisVisible(false);
+            openAppSettings();
+          }, 2000);
+        } else if (requestResult === 'denied') {
+          // Handle the case where the user denied the permission without selecting "Never ask again"
+          // You can provide additional information or instructions to the user here.
+          setisVisible(true);
+          setTimeout(() => {
+            setisVisible(false);
+            openAppSettings().then(() => {
+              navigation.navigate('Splash');
+            });
+          }, 2000);
+
+        } else {
+          // Permission granted or granted after asking.
+          await accessContacts();
+        }
+      } else {
+        await accessContacts();
+      }
+    } else if (Platform.OS === 'ios') {
+      const statusCONTACTS = await request(PERMISSIONS.IOS.CONTACTS);
+      console.warn('CONTACTS Permission Status:', statusCONTACTS);
+
+      if (statusCONTACTS === 'denied' || statusCONTACTS === 'blocked' || statusCONTACTS === 'unavailable') {
+        // Handle the case where the user denied the permission or blocked it.
+        // You can navigate the user to app settings or provide instructions for changing the permission.
+        setisVisible(true);
+        setTimeout(() => {
+          setisVisible(false);
+
+          openAppSettings().then(() => {
+            navigation.navigate('Splash');
+          });
+        }, 2000);
+      } else if (statusCONTACTS === 'granted') {
+        // Permission is granted.
+        const status = await requestMultiple([PERMISSIONS.IOS.CONTACTS]);
+        const allPermissionsGranted = Object.values(status).every(
+          (status) => status === 'granted'
+        );
+        if (allPermissionsGranted) {
+          await accessContacts();
+        } else {
+          // Handle the case where not all permissions are granted.
+          // You can provide additional information or instructions to the user here. 
+        }
+      }
+    }
+  };
+
+  const accessContacts = async () => {
+    await Contacts.getAll()?.then(contactsData => {
+      // const filteredItems = arrangedContacts?.filter((user) => user?.givenName?.toLowerCase().includes(searchQuery.toLowerCase()));
+      setFilteredContacts(contactsData);
+      // setFilteredContacts(getContect);
+      // setContacts(arrangedContacts);
+      setContacts(contactsData);
+    })
+    await getContect;
+  };
   console.log(getContect.length);
   // console.log(getContect);
 
@@ -182,8 +258,8 @@ const InviteScreen = ({ route, navigation }) => {
           <Text
             style={styles.DeselectText}>
             {contacts
-              ? `Deselect all(${contacts?.length})`
-              : `Select all(${contacts?.length})`}
+              ? `Deselect all(${contacts.length})`
+              : `Select all(${contacts.length})`}
           </Text>
         </View>
         <FlatList

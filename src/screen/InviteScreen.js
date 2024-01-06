@@ -75,7 +75,6 @@ const InviteScreen = ({route, navigation}) => {
         return [...prevSelectedContacts, contact.recordID];
       }
     })
-
     setSelectedContactsMain(prevSelectedContacts => {
       if (prevSelectedContacts.some((item) => item.recordID === contact.recordID)) {
         // Contact already selected, remove it from the selection
@@ -123,7 +122,7 @@ const InviteScreen = ({route, navigation}) => {
     });
 
     if (chatRooms.length >= 1) {
-     navigation.navigate('NavStack');
+     navigation.navigate('MainStack');
       
     }
   };
@@ -181,7 +180,7 @@ const InviteScreen = ({route, navigation}) => {
           style={{paddingBottom: 20}}
           data={filteredContacts}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.recordID?.toString()}
+          keyExtractor={(item) => item.recordID}
           renderItem={({item}) => {
             return (
               <>

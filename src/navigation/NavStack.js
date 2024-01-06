@@ -7,6 +7,7 @@ import AMA_Live from '../screen/AMA_Live';
 import CallListScreen from '../screen/CallListScreen';
 import AllChateScreen from '../screen/AllChatScreen';
 import StatusScreen from '../screen/StatusScreen';
+import Status from '../screen/Status/Status';
 
 const Tab = createBottomTabNavigator();
 
